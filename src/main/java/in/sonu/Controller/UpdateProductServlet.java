@@ -3,9 +3,6 @@ package in.sonu.Controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,42 +15,43 @@ import javax.servlet.http.HttpSession;
 import in.sonu.Dao.DbConnectionDao;
 import in.sonu.ServletModel.UploadModel;
 
-@WebServlet("/ListOfAllProductsServlet")
-public class ListOfAllProductServlet extends HttpServlet {
-	/**
-	 * 
-	 */
+@WebServlet("/updateeProduct")
+public class UpdateProductServlet extends HttpServlet {
+	private static final String updateQuery = "UPDATE products SET brandName = ?, description = ?, price = ?, contact = ? WHERE id = ?";
+
 	private static final long serialVersionUID = 1L;
-	private static final String Query = "select * from products";
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<UploadModel> list = new ArrayList<>();
 
-		
+		UploadModel m = new UploadModel();
+		m.setId(Integer.parseInt(req.getParameter("id")));
+		m.setBrandName(req.getParameter("brandName"));
+		m.setDescription(req.getParameter("description"));
+		m.setPrice(req.getParameter("price"));
+		m.setContact(req.getParameter("contact"));
 
 		try {
-			Connection connection = DbConnectionDao.getConnection();
-			PreparedStatement ps = connection.prepareStatement(Query);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-
-				UploadModel model = new UploadModel();
-				model.setId(rs.getInt("ID"));
-				model.setBrandName(rs.getString("brandName"));
-				model.setDescription(rs.getString("description"));
-				model.setPrice(rs.getString("price"));
-				model.setContact(rs.getString("contact"));
-				model.setProductImage(rs.getString("productImage"));
-				list.add(model);
+			Connection con = DbConnectionDao.getConnection();
+			PreparedStatement ps = con.prepareStatement(updateQuery);
+			ps.setString(1, m.getBrandName());
+			ps.setString(2, m.getDescription());
+			ps.setString(3, m.getPrice());
+			ps.setString(4, m.getContact());
+			ps.setInt(5, m.getId());
+			
+			int i = ps.executeUpdate();
+			if(i == 1) {
+				HttpSession session = req.getSession();
+				session.setAttribute("msg", "Update Successful");
+				RequestDispatcher rd = req.getRequestDispatcher("ListOfAllProductsServlet");
+				rd.forward(req, resp);
 			}
-			req.setAttribute("list", list); /////changes here
-			RequestDispatcher rd = req.getRequestDispatcher("list.jsp");
-			rd.forward(req, resp);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
