@@ -11,9 +11,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #000;
+            background: linear-gradient(to right, #4b79a1, #283e51);
             color: #fff;
-            font-family: 'Helvetica', 'Arial', 'Roboto', 'Tahoma', 'Georgia', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -23,6 +23,7 @@
 
         .container {
             padding: 40px;
+            margin-top: 50px;
         }
 
         h1 {
@@ -36,6 +37,19 @@
 
         .form-group {
             margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #fff;
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: #8dc6ff;
+            box-shadow: 0 0 5px rgba(141, 198, 255, 0.5);
         }
 
         .btn-submit {
@@ -83,13 +97,12 @@
             margin-top: auto;
             font-size: 0.9rem;
         }
-
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Edit Product</h1>
+    <h1 style="color : white">Edit Product</h1>
 
     <% 
         UploadModel product = (UploadModel) request.getAttribute("product");
@@ -98,13 +111,11 @@
     <form action="updateeProduct" method="post" >
 
         <input type="hidden" name="id" value="<%= product.getId() %>">
-        <% System.out.println("hello" + product.getId() ); %>
 
         <div class="form-group">
             <label for="brandName">Brand Name</label>
             <input type="text" id="brandName" name="brandName" class="form-control" value="<%= product.getBrandName() %>" required>
         </div>
-         <% System.out.println("hello" + product.getBrandName() ); %>
 
         <div class="form-group">
             <label for="description">Description</label>
@@ -121,8 +132,6 @@
             <input type="text" id="contact" name="contact" class="form-control" value="<%= product.getContact() %>" required>
         </div>
 
-        
-
         <input type="submit" class="btn-submit" value="Update Product">
     </form>
 
@@ -132,7 +141,7 @@
     
     <!-- Back Button -->
     <div class="text-center">
-        <a href="ListOfAllProductsServlet" class="btn-home">Back to List Of Product</a>
+        <a href="ListOfAllProductsServlet" class="btn-home">Back to List Of Products</a>
     </div>
 </div>
 

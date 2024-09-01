@@ -65,6 +65,21 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .remember-me input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #4f46e5;
+        }
+        .remember-me label {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +93,10 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group remember-me">
+                <input type="checkbox" name="rememberme" id="rememberme">
+                <label for="rememberme">Remember me</label>
             </div>
             <button type="submit" class="btn btn-custom">Submit</button>
         </form>

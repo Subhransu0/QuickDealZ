@@ -1,3 +1,3 @@
 <% 
-response.sendRedirect("registration.jsp");
+response.sendRedirect("Cookies");
 %>

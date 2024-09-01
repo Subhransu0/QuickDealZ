@@ -11,6 +11,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,9 +30,11 @@ public class LoginServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		String gmail1 = req.getParameter("email");
 		String password1 = req.getParameter("password");
+		String rememberme = req.getParameter("rememberme");
+
 		ServletContext context = getServletContext();
 		context.setAttribute("gmail", gmail1);
-
+		
 		try {
 			Connection connection = DbConnectionDao.getConnection();
 			PreparedStatement ps = connection.prepareStatement(query);
@@ -42,6 +45,12 @@ public class LoginServlet extends HttpServlet {
 				String storePassword = rs.getString("PASSWORD");
 				String USERNAME = rs.getString("NAME");
 				if (password1.equals(storePassword)) {
+					
+					if (rememberme != null) {
+				           Cookie cookie =  new Cookie("loginstatus", "true");
+				           cookie.setMaxAge(60*60);
+				           resp.addCookie(cookie);
+						}
 					HttpSession session = req.getSession();
 					session.setAttribute("username", USERNAME);
 					RequestDispatcher rd = req.getRequestDispatcher("home.jsp");

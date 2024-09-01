@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background-color: #000;
+            background: linear-gradient(to right, #4b79a1, #283e51);
             color: #fff;
-            font-family: 'Helvetica', 'Arial', 'Roboto', 'Tahoma', 'Georgia', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -22,27 +22,42 @@
         }
 
         .navbar {
-            background-color: #111;
+            background: rgba(0, 0, 0, 0.8);
             padding: 15px 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .navbar .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
         }
 
         .navbar .navbar-nav .nav-link {
-            color: #fff !important;
+            color: #ddd !important;
             font-size: 1.1rem;
+            font-weight: 500;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .navbar-nav .nav-link.active {
+            color: #fff !important;
+            border-bottom: 2px solid #8dc6ff;
+        }
+
+        .navbar .navbar-nav .nav-link:hover {
+            color: #fff !important;
         }
 
         .container {
-            padding: 40px;
+            padding: 60px 20px;
         }
 
         h1 {
             font-size: 2.5rem;
-            color: #8dc6ff;
+            color: #f7fafc;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -53,7 +68,7 @@
 
         .content p {
             font-size: 1.2rem;
-            color: #ccc;
+            color: #d1e8ff;
             margin-bottom: 20px;
         }
 
@@ -82,18 +97,40 @@
         }
 
         .footer {
-            text-align: center;
-            padding: 15px;
             background-color: #111;
-            color: #aaa;
+            color: #ddd;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.875rem;
             margin-top: auto;
-            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #ddd;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #fff;
         }
 
         .footer .developer-credit {
             font-size: 0.9rem;
             color: #ccc;
             margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .navbar-nav .nav-link {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .container {
+                padding: 40px 10px;
+            }
         }
     </style>
 </head>
@@ -137,15 +174,17 @@
         </div>
     </div>
 
-    <!-- Developer Credit -->
-    <div class="footer">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="developer-credit">
             Developed by Subhransu Mohan Das
         </div>
         <div>
-            © 2024 QuikList. All Rights Reserved.
+            © 2024 QuikList. All Rights Reserved. | 
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a>
         </div>
-    </div>
+    </footer>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
